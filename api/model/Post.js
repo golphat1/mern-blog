@@ -1,0 +1,1 @@
+// api/model/Post.js
