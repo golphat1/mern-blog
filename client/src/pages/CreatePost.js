@@ -1,15 +1,16 @@
-import ReactQuill from "react-quill";
+// src/pages/CreatePost.js
+import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import Editor from '../components/Editor'; // Adjust the path if needed
 import 'react-quill/dist/quill.snow.css';
-import {useState} from "react";
-import {Navigate} from "react-router-dom";
-import Editor from "../Editor";
 
 export default function CreatePost() {
-  const [title,setTitle] = useState('');
-  const [summary,setSummary] = useState('');
-  const [content,setContent] = useState('');
+  const [title, setTitle] = useState('');
+  const [summary, setSummary] = useState('');
+  const [content, setContent] = useState('');
   const [files, setFiles] = useState('');
   const [redirect, setRedirect] = useState(false);
+
   async function createNewPost(ev) {
     const data = new FormData();
     data.set('title', title);
@@ -43,7 +44,7 @@ export default function CreatePost() {
       <input type="file"
              onChange={ev => setFiles(ev.target.files)} />
       <Editor value={content} onChange={setContent} />
-      <button style={{marginTop:'5px'}}>Create post</button>
+      <button style={{ marginTop: '5px' }}>Create post</button>
     </form>
   );
 }
