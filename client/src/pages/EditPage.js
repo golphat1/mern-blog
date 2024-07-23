@@ -1,17 +1,18 @@
-import {useEffect, useState} from "react";
-import {Navigate, useParams} from "react-router-dom";
-import Editor from "../Editor";
+// src/pages/EditPost.js
+import { useEffect, useState } from "react";
+import { Navigate, useParams } from "react-router-dom";
+import Editor from '../components/Editor'; // Ensure the path is correct
 
 export default function EditPost() {
-  const {id} = useParams();
-  const [title,setTitle] = useState('');
-  const [summary,setSummary] = useState('');
-  const [content,setContent] = useState('');
+  const { id } = useParams();
+  const [title, setTitle] = useState('');
+  const [summary, setSummary] = useState('');
+  const [content, setContent] = useState('');
   const [files, setFiles] = useState('');
-  const [redirect,setRedirect] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:4000/post/'+id)
+    fetch('http://localhost:4000/post/' + id)
       .then(response => {
         response.json().then(postInfo => {
           setTitle(postInfo.title);
@@ -19,7 +20,7 @@ export default function EditPost() {
           setSummary(postInfo.summary);
         });
       });
-  }, []);
+  }, [id]);
 
   async function updatePost(ev) {
     ev.preventDefault();
@@ -42,7 +43,7 @@ export default function EditPost() {
   }
 
   if (redirect) {
-    return <Navigate to={'/post/'+id} />
+    return <Navigate to={'/post/' + id} />
   }
 
   return (
@@ -58,7 +59,7 @@ export default function EditPost() {
       <input type="file"
              onChange={ev => setFiles(ev.target.files)} />
       <Editor onChange={setContent} value={content} />
-      <button style={{marginTop:'5px'}}>Update post</button>
+      <button style={{ marginTop: '5px' }}>Update post</button>
     </form>
   );
 }
