@@ -10,3 +10,4 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const uploadMiddleware = multer({ dest: 'uploads/' });
 const fs = require('fs');
+const chatRoutes = require('./routes/Chat');
